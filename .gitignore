@@ -1,3 +1,4 @@
 gen/
 tmp/
 .env
+easyp_vendor/
