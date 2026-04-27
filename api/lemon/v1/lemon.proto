@@ -2,27 +2,8 @@ syntax = "proto3";
 package lemon.v1;
 
 import "google/api/annotations.proto";
-import "protoc-gen-openapiv2/options/annotations.proto";
 
 option go_package = "github.com/fruty-gw/lemon/gen/go/api/lemon/v1;lemonv1";
-// ─────────────────────────────────────────────
-// Swagger / OpenAPI meta
-// ─────────────────────────────────────────────
-option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
-  info: {
-    title: "Lemon Service"
-    version: "1.0.0"
-    description: "CRUD-сервис для управления лимонами"
-  }
-  schemes: HTTP
-  schemes: HTTPS
-  consumes: "application/json"
-  produces: "application/json"
-};
-
-// ─────────────────────────────────────────────
-// Enums
-// ─────────────────────────────────────────────
 
 // Size — размер лимона.
 enum Size {
@@ -36,10 +17,6 @@ enum Size {
   SIZE_LARGE = 3;
 }
 
-// ─────────────────────────────────────────────
-// Domain message
-// ─────────────────────────────────────────────
-
 // Lemon — сущность лимона.
 message Lemon {
   // Уникальный идентификатор лимона.
@@ -51,12 +28,6 @@ message Lemon {
   // Кислотность в процентах.
   float acidity_percent = 4;
 }
-
-// ─────────────────────────────────────────────
-// Request / Response messages
-// ─────────────────────────────────────────────
-
-// --- GetLemon ---
 
 // GetLemonRequest — запрос на получение лимона.
 message GetLemonRequest {
@@ -71,8 +42,6 @@ message GetLemonResponse {
   // Лимон.
   Lemon lemon = 1;
 }
-
-// --- SqueezeLemon ---
 
 // SqueezeLemonRequest — запрос на выжимание лимона.
 message SqueezeLemonRequest {
@@ -90,8 +59,6 @@ message SqueezeLemonResponse {
   float juice_ml = 2;
 }
 
-// --- AddLemon ---
-
 // AddLemonRequest — запрос на добавление лимона.
 message AddLemonRequest {
   // Размер нового лимона (json body).
@@ -105,8 +72,6 @@ message AddLemonResponse {
   // ID созданного лимона.
   int64 id = 1;
 }
-
-// --- ListLemons ---
 
 // ListLemonsRequest — запрос на получение списка лимонов.
 message ListLemonsRequest {
@@ -124,76 +89,38 @@ message ListLemonsResponse {
   int64 total = 2;
 }
 
-// ─────────────────────────────────────────────
-// Service
-// ─────────────────────────────────────────────
-
 // LemonService — сервис для управления лимонами.
 service LemonService {
   // GetLemon возвращает лимон по ID и размеру.
-  //
   // HTTP: GET /lemon/{id}?size=<size>
   rpc GetLemon(GetLemonRequest) returns (GetLemonResponse) {
-    option (google.api.http) = {
-      get: "/lemon/{id}"
-      // size передаётся как query-параметр автоматически
-    };
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-      summary: "Получить лимон"
-      description: "Возвращает лимон по его ID и размеру."
-      tags: ["Lemon"]
-      parameters: {
-        headers: {
-          name: "size"
-          description: "Размер лимона: small | medium | large"
-          type: STRING
-        }
-      }
-    };
+    option (google.api.http) = {get: "/lemon/{id}"};
   }
 
   // SqueezeLemon выжимает лимон по ID.
-  //
   // HTTP: PATCH /lemon/{id}/squeeze
   rpc SqueezeLemon(SqueezeLemonRequest) returns (SqueezeLemonResponse) {
     option (google.api.http) = {
       patch: "/lemon/{id}/squeeze"
       body: "*"
     };
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-      summary: "Выжать лимон"
-      description: "Помечает лимон как выжатый и возвращает количество полученного сока в мл."
-      tags: ["Lemon"]
-    };
   }
 
   // AddLemon создаёт новый лимон с заданными параметрами.
-  //
   // HTTP: POST /lemon
   rpc AddLemon(AddLemonRequest) returns (AddLemonResponse) {
     option (google.api.http) = {
       post: "/lemon"
       body: "*"
     };
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-      summary: "Добавить лимон"
-      description: "Создаёт новый лимон с указанным размером и кислотностью. Возвращает присвоенный ID."
-      tags: ["Lemon"]
-    };
   }
 
   // ListLemons возвращает список лимонов с фильтрацией.
-  //
   // HTTP: GET /lemon?size=<size>&only_squeezed=<bool>
   rpc ListLemons(ListLemonsRequest) returns (ListLemonsResponse) {
     option (google.api.http) = {
       get: "/lemon"
       // size и only_squeezed передаются как query-параметры автоматически
-    };
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-      summary: "Список лимонов"
-      description: "Возвращает список лимонов с возможностью фильтрации по размеру и статусу выжатости."
-      tags: ["Lemon"]
     };
   }
 }
