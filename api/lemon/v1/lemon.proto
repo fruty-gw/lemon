@@ -74,12 +74,7 @@ message AddLemonResponse {
 }
 
 // ListLemonsRequest — запрос на получение списка лимонов.
-message ListLemonsRequest {
-  // Фильтр по размеру (query param).
-  Size size = 1;
-  // Показывать только выжатые (query param).
-  bool only_squeezed = 2;
-}
+message ListLemonsRequest {}
 
 // ListLemonsResponse — ответ на запрос получения списка лимонов.
 message ListLemonsResponse {
@@ -115,12 +110,11 @@ service LemonService {
     };
   }
 
-  // ListLemons возвращает список лимонов с фильтрацией.
-  // HTTP: GET /lemon?size=<size>&only_squeezed=<bool>
+  // ListLemons возвращает список всех лимонов.
+  // HTTP: GET /lemon
   rpc ListLemons(ListLemonsRequest) returns (ListLemonsResponse) {
     option (google.api.http) = {
       get: "/lemon"
-      // size и only_squeezed передаются как query-параметры автоматически
     };
   }
 }
