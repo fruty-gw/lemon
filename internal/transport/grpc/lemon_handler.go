@@ -11,6 +11,7 @@ type lemonService interface {
 	SqueezeLemon()
 	AddLemon()
 	WashLemons()
+	ListLemons()
 }
 
 type LemonHandler struct {

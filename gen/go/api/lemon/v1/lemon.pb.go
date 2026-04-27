@@ -466,11 +466,7 @@ func (x *AddLemonResponse) GetId() int64 {
 
 // ListLemonsRequest — запрос на получение списка лимонов.
 type ListLemonsRequest struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Фильтр по размеру (query param).
-	Size Size `protobuf:"varint,1,opt,name=size,proto3,enum=lemon.v1.Size" json:"size,omitempty"`
-	// Показывать только выжатые (query param).
-	OnlySqueezed  bool `protobuf:"varint,2,opt,name=only_squeezed,json=onlySqueezed,proto3" json:"only_squeezed,omitempty"`
+	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -503,20 +499,6 @@ func (x *ListLemonsRequest) ProtoReflect() protoreflect.Message {
 // Deprecated: Use ListLemonsRequest.ProtoReflect.Descriptor instead.
 func (*ListLemonsRequest) Descriptor() ([]byte, []int) {
 	return file_api_lemon_v1_lemon_proto_rawDescGZIP(), []int{7}
-}
-
-func (x *ListLemonsRequest) GetSize() Size {
-	if x != nil {
-		return x.Size
-	}
-	return Size_SIZE_UNSPECIFIED
-}
-
-func (x *ListLemonsRequest) GetOnlySqueezed() bool {
-	if x != nil {
-		return x.OnlySqueezed
-	}
-	return false
 }
 
 // ListLemonsResponse — ответ на запрос получения списка лимонов.
@@ -599,10 +581,8 @@ const file_api_lemon_v1_lemon_proto_rawDesc = "" +
 	"\x04size\x18\x01 \x01(\x0e2\x0e.lemon.v1.SizeR\x04size\x12'\n" +
 	"\x0facidity_percent\x18\x02 \x01(\x02R\x0eacidityPercent\"\"\n" +
 	"\x10AddLemonResponse\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x03R\x02id\"\\\n" +
-	"\x11ListLemonsRequest\x12\"\n" +
-	"\x04size\x18\x01 \x01(\x0e2\x0e.lemon.v1.SizeR\x04size\x12#\n" +
-	"\ronly_squeezed\x18\x02 \x01(\bR\fonlySqueezed\"S\n" +
+	"\x02id\x18\x01 \x01(\x03R\x02id\"\x13\n" +
+	"\x11ListLemonsRequest\"S\n" +
 	"\x12ListLemonsResponse\x12'\n" +
 	"\x06lemons\x18\x01 \x03(\v2\x0f.lemon.v1.LemonR\x06lemons\x12\x14\n" +
 	"\x05total\x18\x02 \x01(\x03R\x05total*M\n" +
@@ -652,21 +632,20 @@ var file_api_lemon_v1_lemon_proto_depIdxs = []int32{
 	1,  // 2: lemon.v1.GetLemonResponse.lemon:type_name -> lemon.v1.Lemon
 	1,  // 3: lemon.v1.SqueezeLemonResponse.lemon:type_name -> lemon.v1.Lemon
 	0,  // 4: lemon.v1.AddLemonRequest.size:type_name -> lemon.v1.Size
-	0,  // 5: lemon.v1.ListLemonsRequest.size:type_name -> lemon.v1.Size
-	1,  // 6: lemon.v1.ListLemonsResponse.lemons:type_name -> lemon.v1.Lemon
-	2,  // 7: lemon.v1.LemonService.GetLemon:input_type -> lemon.v1.GetLemonRequest
-	4,  // 8: lemon.v1.LemonService.SqueezeLemon:input_type -> lemon.v1.SqueezeLemonRequest
-	6,  // 9: lemon.v1.LemonService.AddLemon:input_type -> lemon.v1.AddLemonRequest
-	8,  // 10: lemon.v1.LemonService.ListLemons:input_type -> lemon.v1.ListLemonsRequest
-	3,  // 11: lemon.v1.LemonService.GetLemon:output_type -> lemon.v1.GetLemonResponse
-	5,  // 12: lemon.v1.LemonService.SqueezeLemon:output_type -> lemon.v1.SqueezeLemonResponse
-	7,  // 13: lemon.v1.LemonService.AddLemon:output_type -> lemon.v1.AddLemonResponse
-	9,  // 14: lemon.v1.LemonService.ListLemons:output_type -> lemon.v1.ListLemonsResponse
-	11, // [11:15] is the sub-list for method output_type
-	7,  // [7:11] is the sub-list for method input_type
-	7,  // [7:7] is the sub-list for extension type_name
-	7,  // [7:7] is the sub-list for extension extendee
-	0,  // [0:7] is the sub-list for field type_name
+	1,  // 5: lemon.v1.ListLemonsResponse.lemons:type_name -> lemon.v1.Lemon
+	2,  // 6: lemon.v1.LemonService.GetLemon:input_type -> lemon.v1.GetLemonRequest
+	4,  // 7: lemon.v1.LemonService.SqueezeLemon:input_type -> lemon.v1.SqueezeLemonRequest
+	6,  // 8: lemon.v1.LemonService.AddLemon:input_type -> lemon.v1.AddLemonRequest
+	8,  // 9: lemon.v1.LemonService.ListLemons:input_type -> lemon.v1.ListLemonsRequest
+	3,  // 10: lemon.v1.LemonService.GetLemon:output_type -> lemon.v1.GetLemonResponse
+	5,  // 11: lemon.v1.LemonService.SqueezeLemon:output_type -> lemon.v1.SqueezeLemonResponse
+	7,  // 12: lemon.v1.LemonService.AddLemon:output_type -> lemon.v1.AddLemonResponse
+	9,  // 13: lemon.v1.LemonService.ListLemons:output_type -> lemon.v1.ListLemonsResponse
+	10, // [10:14] is the sub-list for method output_type
+	6,  // [6:10] is the sub-list for method input_type
+	6,  // [6:6] is the sub-list for extension type_name
+	6,  // [6:6] is the sub-list for extension extendee
+	0,  // [0:6] is the sub-list for field type_name
 }
 
 func init() { file_api_lemon_v1_lemon_proto_init() }

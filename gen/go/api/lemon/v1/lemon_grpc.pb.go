@@ -40,8 +40,8 @@ type LemonServiceClient interface {
 	// AddLemon создаёт новый лимон с заданными параметрами.
 	// HTTP: POST /lemon
 	AddLemon(ctx context.Context, in *AddLemonRequest, opts ...grpc.CallOption) (*AddLemonResponse, error)
-	// ListLemons возвращает список лимонов с фильтрацией.
-	// HTTP: GET /lemon?size=<size>&only_squeezed=<bool>
+	// ListLemons возвращает список всех лимонов.
+	// HTTP: GET /lemon
 	ListLemons(ctx context.Context, in *ListLemonsRequest, opts ...grpc.CallOption) (*ListLemonsResponse, error)
 }
 
@@ -108,8 +108,8 @@ type LemonServiceServer interface {
 	// AddLemon создаёт новый лимон с заданными параметрами.
 	// HTTP: POST /lemon
 	AddLemon(context.Context, *AddLemonRequest) (*AddLemonResponse, error)
-	// ListLemons возвращает список лимонов с фильтрацией.
-	// HTTP: GET /lemon?size=<size>&only_squeezed=<bool>
+	// ListLemons возвращает список всех лимонов.
+	// HTTP: GET /lemon
 	ListLemons(context.Context, *ListLemonsRequest) (*ListLemonsResponse, error)
 }
 

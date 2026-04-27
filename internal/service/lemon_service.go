@@ -21,3 +21,7 @@ func (s *lemonService) AddLemon() {
 func (s *lemonService) WashLemons() {
 
 }
+
+func (s *lemonService) ListLemons() {
+
+}
